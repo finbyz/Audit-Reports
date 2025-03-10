@@ -48,6 +48,8 @@ def get_data(filters):
             `tabDelivery Note` dn
             ON dn_item.parent = dn.name
         WHERE
+            si.update_stock = 0  
+            AND
             (ABS(IFNULL(so_item.amount, 0) - IFNULL(si_item.amount, 0)) > 0
             OR ABS(IFNULL(so_item.amount, 0) - IFNULL(dn_item.amount, 0)) > 0
             OR ABS(IFNULL(si_item.amount, 0) - IFNULL(dn_item.amount, 0)) > 0)
