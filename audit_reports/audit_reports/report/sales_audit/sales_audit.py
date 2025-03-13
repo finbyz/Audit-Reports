@@ -56,7 +56,10 @@ def get_data(filters):
     """
     if filters.get("from_date") and filters.get("to_date"):
         query += " AND si.posting_date BETWEEN %(from_date)s AND %(to_date)s"
-
+    
+    if filters.get("company"):
+        query += " AND si.company = %(company)s"
+        
     query += " ORDER BY so_item.item_code, so_item.parent"
 
     return frappe.db.sql(query, filters, as_dict=True)
